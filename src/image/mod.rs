@@ -1,5 +1,5 @@
 pub mod ppm;
-
+pub mod png;
 use crate::vec3::Vec3;
 use crate::ray::{Ray};
 use core::ops::{Index, IndexMut};
