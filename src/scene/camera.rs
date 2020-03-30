@@ -22,17 +22,31 @@ impl Camera {
     pub fn upper_left_corner(&self) -> Vec3 {
         let half_height = (self.vfov/2.0).tan();
         let half_width = half_height * self.aspect;
-        
-        Vec3(-half_width, half_height, -1.0)
+
+        let w = (self.look_from-self.look_at).unit_vector();
+        let u = Vec3::cross(self.look_up,w).unit_vector();
+        let v = Vec3::cross(w,u);
+
+        self.look_from - u*half_width + v*half_height - w
     }
     
     pub fn horizontal(&self) -> Vec3 {
         let half_width = (self.vfov/2.0).tan() * self.aspect;
-        Vec3(2.0*half_width, 0.0, 0.0)
+
+        let w = (self.look_from-self.look_at).unit_vector();
+        let u = Vec3::cross(self.look_up,w).unit_vector();
+        let v = Vec3::cross(w,u);
+
+        u*(2.0*half_width)
     }
 
     pub fn vertical(&self) -> Vec3 {
         let half_height = (self.vfov/2.0).tan();
-        Vec3(0.0,2.0*half_height, 0.0)
+
+        let w = (self.look_from-self.look_at).unit_vector();
+        let u = Vec3::cross(self.look_up,w).unit_vector();
+        let v = Vec3::cross(w,u);
+
+        v*(2.0*half_height)
     }
 }
