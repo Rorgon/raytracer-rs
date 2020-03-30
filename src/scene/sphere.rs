@@ -8,6 +8,12 @@ pub struct Sphere {
     pub color : Vec3,
 }
 
+impl Sphere {
+    pub fn new(origin: Vec3, radius: f64, color: Vec3) -> Sphere {
+        Sphere{origin, radius, color}
+    }
+}
+
 impl Hittable for Sphere {
     fn hit(&self, ray: &Ray) -> bool {
         let oc = ray.origin - self.origin;

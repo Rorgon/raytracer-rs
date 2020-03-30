@@ -8,7 +8,6 @@ pub fn write(image: &Image, filename: &str) -> image::error::ImageResult<()> {
     let mut buffer = fs::File::create(filename).unwrap();
 
     let png = PNGEncoder::new(buffer);
-
     let mut data :Vec<u8> = Vec::new();
 
     for p in &image.pixels {

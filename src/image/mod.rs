@@ -31,26 +31,6 @@ impl Image {
         Image {width, height, pixels: vec![color; height*width]}
     }
 
-    pub fn render(&mut self){
-
-        let origin = Vec3(0.0,0.0,0.0);
-        let upper_left_corner = Vec3(-2.0,1.0,-1.0);
-        let horizontal = Vec3(4.0,0.0,0.0);
-        let vertical = Vec3(0.0,2.0,0.0);
-
-        for j in 0..self.height {
-            for i in 0..self.width {
-                let u = (i as f64) / (self.width as f64);
-                let v = (j as f64) / (self.height as f64);
-
-                let r = Ray::new(origin , upper_left_corner + horizontal*u + vertical*(-v));
-
-               
-
-                self[(i,j)] = r.color();
-            }
-        }
-    }
 
     pub fn width(&self) -> usize {
         self.width

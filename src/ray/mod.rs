@@ -16,7 +16,7 @@ impl Ray {
         self.origin + self.direction * t
     }
 
-    pub fn color(&self) -> Vec3 { 
+    pub fn color(&self, objects: &Vec<Box<dyn Hittable>>) -> Vec3 {
         let sphere = Sphere {origin : Vec3(0.0,0.0,-1.0), radius: 0.5 , color : Vec3(1.0,0.0,0.0)};
 
         if sphere.hit(self) {
