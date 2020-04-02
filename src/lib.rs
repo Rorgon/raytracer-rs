@@ -14,7 +14,7 @@ mod tests {
     #[test]
     fn add_and_sub_vec3() {
         let vec1 = Vec3(1.0, 1.0, 1.0);
-        let vec2 = Vec3(0.5, 0.0, 2.0);
+       let vec2 = Vec3(0.5, 0.0, 2.0);
         assert_eq!(
             vec1+vec2, 
             Vec3(1.5, 1.0, 3.0)

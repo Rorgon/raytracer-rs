@@ -1,6 +1,6 @@
 
-use crate::ray::{Hittable};
 use crate::vec3::Vec3;
+use crate::ray::Ray;
 
 pub struct Camera {
     pub vfov: f64,
@@ -35,7 +35,6 @@ impl Camera {
 
         let w = (self.look_from-self.look_at).unit_vector();
         let u = Vec3::cross(self.look_up,w).unit_vector();
-        let v = Vec3::cross(w,u);
 
         u*(2.0*half_width)
     }
@@ -48,5 +47,9 @@ impl Camera {
         let v = Vec3::cross(w,u);
 
         v*(2.0*half_height)
+    }
+
+    pub fn get_ray( &self, u: f64, v: f64) -> Ray {
+        Ray::new(self.origin() , self.upper_left_corner() + self.horizontal()*u + self.vertical()*(-v))
     }
 }

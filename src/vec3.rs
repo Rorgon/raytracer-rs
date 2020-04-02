@@ -104,7 +104,7 @@ impl Vec3 {
         (self.0*self.0+self.1*self.1+self.2*self.2).sqrt()
     }
 
-    pub fn squared_length(&self) -> f64 {
+    pub fn length_squared(&self) -> f64 {
         self.0*self.0+self.1*self.1+self.2*self.2
     }
 

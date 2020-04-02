@@ -5,7 +5,7 @@ use image::png::PNGEncoder;
 use image::ColorType;
 
 pub fn write(image: &Image, filename: &str) -> image::error::ImageResult<()> {
-    let mut buffer = fs::File::create(filename).unwrap();
+    let buffer = fs::File::create(filename).unwrap();
 
     let png = PNGEncoder::new(buffer);
     let mut data :Vec<u8> = Vec::new();
