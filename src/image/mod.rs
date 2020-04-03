@@ -9,7 +9,6 @@ pub struct Image {
     pixels : Vec<Vec3>
 }
 
-
 impl Index<(usize,usize)> for Image {
     type Output = Vec3;
 

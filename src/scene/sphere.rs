@@ -1,15 +1,16 @@
 use crate::vec3::Vec3;
-use crate::ray::{Ray, hit::{Hittable,HitRecord}};
+use crate::ray::{Ray, hit::{Hittable,HitRecord}, material::Material};
+use std::rc::Rc;
 
 pub struct Sphere {
     pub center : Vec3,
     pub radius : f64,
-    pub color : Vec3,
+    pub material : Rc<dyn Material>
 }
 
 impl Sphere {
-    pub fn new(center: Vec3, radius: f64, color: Vec3) -> Sphere {
-        Sphere{ center, radius, color}
+    pub fn new(center: Vec3, radius: f64, material: Rc<dyn Material>) -> Sphere {
+        Sphere{ radius, center, material}
     }
 }
 
@@ -35,7 +36,7 @@ impl Hittable for Sphere {
                 let front_face = same_side(ray.direction, outward_normal);
                 let normal = if front_face { outward_normal } else { - outward_normal };
 
-                return Some(HitRecord { point, normal, time, front_face })
+                return Some(HitRecord::new( point, normal, time, front_face, self.material.clone()) )
             };
             let time = (-half_b + root)/a;
             if interval.0 < time && time < interval.1 {
@@ -44,7 +45,7 @@ impl Hittable for Sphere {
                 let front_face = same_side(ray.direction, outward_normal);
                 let normal = if front_face { outward_normal } else { - outward_normal };
 
-                return Some(HitRecord { point, normal, time, front_face })
+                return Some(HitRecord::new( point, normal, time, front_face, self.material.clone() ))
             };
         }; 
         None
