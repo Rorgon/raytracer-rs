@@ -40,7 +40,7 @@ impl Ray {
          
         let t = 0.5 * (self.direction.unit_vector().y() + 1.0);
         match closest_hit {
-            Some(record) => match record.material.scatter(self, record.point, record.normal) {
+            Some(record) => match record.material.scatter(*self, record.point, record.normal) {
                 Some(ScatterInfo(scatter, attenuation)) => attenuation * scatter.color(objects, depth-1),
                 None => Vec3(0.0,0.0,0.0)
             }

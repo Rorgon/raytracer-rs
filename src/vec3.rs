@@ -1,5 +1,6 @@
 use core::ops::{Add, Mul, Div, Sub, Neg};
 use std::convert::From;
+use rand::prelude::*;
 
 
 #[derive(Copy, Clone, Debug, PartialEq)]
@@ -110,5 +111,10 @@ impl Vec3 {
 
     pub fn unit_vector(&self) -> Self {
         *self / self.length()
+    }
+    
+    pub fn random_vector(min: f64, max: f64) -> Self {
+        let mut rng = rand::thread_rng();
+        Vec3(rng.gen_range(min,max),rng.gen_range(min,max),rng.gen_range(min,max))
     }
 }
