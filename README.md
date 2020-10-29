@@ -1,2 +1,2 @@
 # raytracer-rs
-Raytracer written in rust with multiple targets.
+Raytracer parallelized thanks to the wonderful rayon crate.
