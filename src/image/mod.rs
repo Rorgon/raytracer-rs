@@ -37,5 +37,13 @@ impl Image {
     pub fn height(&self) -> usize {
         self.height
     }
+
+    pub fn pixels(&self) -> &[Vec3] {
+        &self.pixels[..]
+    }
+
+    pub fn pixels_mut(&mut self) -> &mut [Vec3] {
+        &mut self.pixels[..]
+    }
 }
      

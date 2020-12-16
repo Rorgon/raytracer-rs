@@ -5,7 +5,7 @@ use std::f64::consts::PI;
 
 pub struct ScatterInfo(pub Ray,pub Vec3);
 
-pub trait Material {
+pub trait Material : Sync + Send {
     fn scatter(&self, ray_in : Ray, point : Vec3, normal: Vec3) -> Option<ScatterInfo>;
 }
 

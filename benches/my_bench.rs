@@ -1,15 +1,28 @@
-use raytracer::image::png;
-use raytracer::vec3::Vec3;
-use raytracer::scene::{Scene, sphere::Sphere, camera::Camera};
-use raytracer::ray::material::{ Lambertian , Metallic};
-use std::{sync::Arc, error::Error};
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use raytracer::{
+    image::png,
+    vec3::Vec3,
+    scene::{
+        Scene, 
+        sphere::Sphere, 
+        camera::Camera,
+    },
+    ray::material::{ 
+        Lambertian , 
+        Metallic
+    },
+};
+use std::{
+    sync::Arc, 
+    error::Error
+};
 use core::f64::consts::PI;
 
 
-fn main() -> Result<(), Box<dyn Error> > { 
-    let height: usize = 400;
-    let width: usize = 800;
-    let samples_per_pixel : u64 = 100;
+pub fn scene(){
+    let height: usize = 100;
+    let width: usize = 200;
+    let samples_per_pixel : u64 = 50;
     let max_depth : u64 = 50;
 
 
@@ -31,7 +44,12 @@ fn main() -> Result<(), Box<dyn Error> > {
                                    Arc::new(Metallic::new(Vec3(0.8,0.6,0.8),0.5)))));
 
     let image = scene.render(width, height, samples_per_pixel, max_depth);
-    png::write(&image, "test.png")?;
-
-    Ok(())
+    black_box(image);
 }
+
+pub fn criterion_benchmark(c: &mut Criterion) {
+    c.bench_function("scene", |b| b.iter(|| scene()));
+}
+
+criterion_group!(benches, criterion_benchmark);
+criterion_main!(benches);
